@@ -1,12 +1,13 @@
+import json
 import os
 import tempfile
 import time
 from dataclasses import dataclass
-import json
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from twtr import Tweet, Twitter
 from utils import Log
-from twtr import Twitter, Tweet
 
 log = Log('ScreenShot')
 
@@ -20,9 +21,6 @@ class ScreenShot:
     T_SLEEP = 10
     WIDTH = 720
     HEIGHT = 720
-
-    def tweet(self):
-        pass
 
     @staticmethod
     def random():
@@ -53,6 +51,8 @@ class ScreenShot:
         data = json.loads(data_json)
         log.debug(f'{data=}')
 
+        url_current = driver.current_url
+        log.debug(f'{url_current=}')
         driver.quit()
 
         os.startfile(image_path)
@@ -71,12 +71,12 @@ class ScreenShot:
             p_votes = votes / total_votes
             if p_votes < 0.05:
                 p_votes_others += p_votes
-                continue    
+                continue
             result_lines.append(f'#{party} {p_votes:.0%}')
-        
+
         if p_votes_others > 0:
             result_lines.append(f'Others {p_votes_others:.0%}')
-        
+
         result_text = '\n'.join(result_lines)
 
         ent_pd = data['entPD']
@@ -85,20 +85,16 @@ class ScreenShot:
         pd_name = ent_pd['name'].replace(' ', '')
         ed_name = end_ed['name'].replace(' ', '')
 
-        text = f'''
-{election_year} Presidential Election, #SriLanka
-
-#{pd_name} PD
-#{ed_name} ED
+        text = f'''#PresPollSL{election_year}
+#{pd_name} (#{ed_name})
 
 {result_text}
 
-#PresPollSL{election_year}
-        '''
+{url_current}'''
         print(text)
 
         return ScreenShot(text, image_path)
-    
+
     def tweet(self):
         try:
             twitter = Twitter()
