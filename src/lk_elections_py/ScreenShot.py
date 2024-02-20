@@ -17,7 +17,7 @@ class ScreenShot:
     text: str
     image_path: str
 
-    URL = 'https://nuuuwan.github.io/lanka_elections/'
+    URL = 'https://nuuuwan.github.io/lk_elections/'
     T_SLEEP = 10
     WIDTH = 720
     HEIGHT = 720
