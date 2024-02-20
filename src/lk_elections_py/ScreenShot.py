@@ -55,7 +55,6 @@ class ScreenShot:
         log.debug(f'{url_current=}')
         driver.quit()
 
-        os.startfile(image_path)
         election_year = data['electionYear']
         result = data['result']
 
