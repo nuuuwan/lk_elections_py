@@ -19,8 +19,8 @@ class ScreenShot:
 
     URL = 'https://nuuuwan.github.io/lk_elections/'
     T_SLEEP = 10
-    WIDTH = 720
-    HEIGHT = 720
+    WIDTH = 1000
+    HEIGHT = 1000
 
     @staticmethod
     def random():
