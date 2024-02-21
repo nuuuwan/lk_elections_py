@@ -55,7 +55,7 @@ class ScreenShot:
         log.debug(f'{url_current=}')
         driver.quit()
 
-        election_year = data['electionYear']
+        election_year = data['year']
         result = data['result']
 
         party_to_votes = result['partyToVotes']['partyToVotes']
@@ -78,13 +78,20 @@ class ScreenShot:
 
         result_text = '\n'.join(result_lines)
 
+        type_name = data['electionTypeID']
+
+        if type_name == 'Presidential':
+            hashtag = 'PresPollSL'
+        else:
+            hashtag = 'GenElecSL'
+
         ent_pd = data['entPD']
         end_ed = data['entED']
 
         pd_name = ent_pd['name'].replace(' ', '')
         ed_name = end_ed['name'].replace(' ', '')
 
-        text = f'''#PresPollSL{election_year}
+        text = f'''#{hashtag}{election_year}
 #{pd_name} (#{ed_name})
 
 {result_text}
