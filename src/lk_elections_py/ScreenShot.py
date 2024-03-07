@@ -18,7 +18,7 @@ class ScreenShot:
     image_path: str
 
     URL = 'https://nuuuwan.github.io/lk_elections/'
-    T_SLEEP = 10
+    T_SLEEP = 20
     WIDTH = 1000
     HEIGHT = 1000
 
