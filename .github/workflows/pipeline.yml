@@ -2,35 +2,34 @@ name: pipeline
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: '0 * * * *'
+  schedule:
+    - cron: "*/15 02-14 * * *"
 
 jobs:
   pipeline:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.10'
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        pip install build
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install build
 
-    - name: Checkout github repo
-      uses: actions/checkout@v2
-      with:
-        ref: 'main'
-        token: "${{ secrets.REPO_DATA_TOKEN }}"
+      - name: Checkout github repo
+        uses: actions/checkout@v2
+        with:
+          ref: "main"
+          token: "${{ secrets.REPO_DATA_TOKEN }}"
 
-    - name: Run pipeline.py
-      run: |
-        export PYTHONPATH="$PYTHONPATH:./src"
-        python workflows/pipeline.py --TWTR_BEARER_TOKEN="${{ secrets.TWTR_BEARER_TOKEN }}" --TWTR_API_KEY="${{ secrets.TWTR_API_KEY }}" --TWTR_API_KEY_SECRET="${{ secrets.TWTR_API_KEY_SECRET }}" --TWTR_ACCESS_TOKEN="${{ secrets.TWTR_ACCESS_TOKEN }}" --TWTR_ACCESS_TOKEN_SECRET="${{ secrets.TWTR_ACCESS_TOKEN_SECRET }}"
+      - name: Run pipeline.py
+        run: |
+          export PYTHONPATH="$PYTHONPATH:./src"
+          python workflows/pipeline.py --TWTR_BEARER_TOKEN="${{ secrets.TWTR_BEARER_TOKEN }}" --TWTR_API_KEY="${{ secrets.TWTR_API_KEY }}" --TWTR_API_KEY_SECRET="${{ secrets.TWTR_API_KEY_SECRET }}" --TWTR_ACCESS_TOKEN="${{ secrets.TWTR_ACCESS_TOKEN }}" --TWTR_ACCESS_TOKEN_SECRET="${{ secrets.TWTR_ACCESS_TOKEN_SECRET }}"
