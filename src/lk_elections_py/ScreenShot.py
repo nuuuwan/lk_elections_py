@@ -70,7 +70,7 @@ class ScreenShot:
         div_text_body = div_random.find_element(
             By.XPATH, './/div[@id="lk-elections-widget-text-body"]'
         )
-        text_body = div_text_body.text
+        text_body = div_text_body.text.replace('\n', '\n\n')
         log.debug(f'{text_body=}')
 
         text = '\n\n'.join([div_text_title.text, div_text_body.text])
