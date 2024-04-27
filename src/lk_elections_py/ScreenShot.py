@@ -25,7 +25,7 @@ class ScreenShot:
     text: str
     image_path: str
 
-    URL = 'https://nuuuwan.github.io/lk_elections/'
+    URL = 'https://nuuuwan.github.io/lk_elections?pageID=random'
     T_SLEEP = 20
     WIDTH = 2000
     HEIGHT = 2000
