@@ -48,32 +48,32 @@ class ScreenShot:
         log.debug(f'😴 Sleeping for {ScreenShot.T_SLEEP}s...')
         time.sleep(ScreenShot.T_SLEEP)
 
-        div_widget_list = driver.find_elements(
-            By.XPATH, '//div[@id="lk-elections-widget"]'
+        elem_widget_list = driver.find_elements(
+            By.XPATH, '//*[@id="lk-elections-widget"]'
         )
-        n_div_widget_list = len(div_widget_list)
-        log.debug(f'Found {n_div_widget_list} widgets.')
-        if n_div_widget_list == 0:
+        n_elem_widget_list = len(elem_widget_list)
+        log.debug(f'Found {n_elem_widget_list} widgets.')
+        if n_elem_widget_list == 0:
             raise Exception('No widgets found')
 
-        div_random = random.choice(div_widget_list)
+        elem_random = random.choice(elem_widget_list)
 
-        div_random.screenshot(image_path)
+        elem_random.screenshot(image_path)
         log.debug(f'Screenshot saved to {image_path}')
 
-        div_text_title = div_random.find_element(
-            By.XPATH, './/div[@id="lk-elections-widget-text-title"]'
+        elem_text_title = elem_random.find_element(
+            By.XPATH, './/*[@id="lk-elections-widget-text-title"]'
         )
-        text_title = div_text_title.text
+        text_title = elem_text_title.text
         log.debug(f'{text_title=}')
         
-        div_text_body = div_random.find_element(
-            By.XPATH, './/div[@id="lk-elections-widget-text-body"]'
+        elem_text_body = elem_random.find_element(
+            By.XPATH, './/*[@id="lk-elections-widget-text-body"]'
         )
-        text_body = div_text_body.text.replace('\n', '\n\n')
+        text_body = elem_text_body.text.replace('\n', '\n\n')
         log.debug(f'{text_body=}')
 
-        text = '\n\n'.join([div_text_title.text, div_text_body.text])
+        text = '\n\n'.join([elem_text_title.text, elem_text_body.text])
         cleaned_text = clean(text)
 
         url_current = driver.current_url
