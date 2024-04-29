@@ -79,7 +79,7 @@ class ScreenShot:
         url_current = driver.current_url
         log.debug(f'{url_current=}')
 
-        cleaned_text += '\n\n' + "See also " + url_current
+        cleaned_text += '\n\n' + url_current
         print(cleaned_text)
         log.debug(f'len(cleaned_text) = {len(cleaned_text)}')
 
