@@ -2,8 +2,8 @@ name: pipeline
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "*/15 02-14 * * *"
+  # schedule:
+  #   - cron: "*/15 02-14 * * *"
 
 jobs:
   pipeline:
